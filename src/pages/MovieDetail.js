@@ -1,7 +1,7 @@
-// src/pages/MovieDetail.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import "../styles/MovieDetail.css";
 
 const MovieDetail = () => {
 	const { id } = useParams();
@@ -37,7 +37,6 @@ const MovieDetail = () => {
 						<img
 							src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 							alt={movie.title}
-							className="Mainimg"
 						/>
 					</div>
 					<div className="innerData">
@@ -55,7 +54,10 @@ const MovieDetail = () => {
 			<h1 className="cast-header">Cast</h1>
 			<div className="cast-list">
 				{cast.map((member) => (
-					<div className="cast-member" key={member.cast_id}>
+					<div
+						className="cast-member movie-card"
+						key={member.cast_id}
+					>
 						<img
 							src={`https://image.tmdb.org/t/p/w200${member.profile_path}`}
 							alt={member.name}

@@ -14,9 +14,11 @@ const Navbar = () => {
 
 	return (
 		<nav>
-			<Link to="/">Home</Link>
-			<Link to="/top-rated">Top Rated</Link>
-			<Link to="/upcoming">Upcoming</Link>
+			<div>
+				<Link to="/">Home</Link>
+				<Link to="/top-rated">Top Rated</Link>
+				<Link to="/upcoming">Upcoming</Link>
+			</div>
 			<form onSubmit={handleSearch}>
 				<input
 					type="text"

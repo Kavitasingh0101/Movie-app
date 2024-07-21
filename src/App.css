@@ -1,16 +1,17 @@
-/* src/App.css */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #0f0f11;
+  color: #f4f4f4;
 }
 
 nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   background-color: #333;
   padding: 1rem;
-  gap: 40px;
 }
 
 nav a {
@@ -18,7 +19,6 @@ nav a {
   text-decoration: none;
   margin-right: 1rem;
   padding-top: 8px;
-
 }
 
 nav form {
@@ -38,7 +38,25 @@ nav button {
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
-  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav form {
+    width: 100%;
+  }
+
+  nav input {
+    flex: 1;
+  }
+
+  nav button {
+    flex: 0;
+  }
 }
 
 .movie-grid {
@@ -61,12 +79,12 @@ nav button {
 
 .movie-card h2 {
   margin: 0;
-  padding-top:0.5rem;
+  padding-top: 0.5rem;
   font-size: 1.3rem;
   color: #fff;
 }
 
-.movie-card p{
+.movie-card p {
   color: #fff;
 }
 
@@ -91,104 +109,3 @@ nav button {
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 1rem;
 }
-/* src/pages/MovieDetail.css */
-.movie-detail-container {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #555;
-  color: #f4f4f4;
-}
-
-.movie-detail-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 100%;
-
-}
-
-.movie-detail-header img {
-  width: 300px;
-  height: auto;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
-.movie-overview {
-  margin-top: 20px;
-  max-width: 700px;
-
-}
-
-.movie-overview h2 {
-  margin-bottom: 10px;
-}
-
-.cast-header {
-  margin-top: 40px;
-  text-align: center;
-}
-
-.cast-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.cast-member {
-  text-align: center;
-  max-width: 150px;
-}
-
-.cast-member img {
-  width: 150px;
-  height: auto;
-  border-radius: 10px;
-}
-
-.cast-name {
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.cast-character {
-  font-style: italic;
-}
-.content{
-  display: flex;
-  gap: 20px;
-  background-color: #0f0f11;
-  color: #f4f4f4;
-  padding: 10px;
-
-}
-.innerData{
-  display: flex;
-  flex-direction: column;
-  row-gap: 15px;
-  
-
-}
-
-.rating{
-  color:rgb(64, 64, 152);
-}
-
-.Popular_container{
-  background: #555;
-  color: #f4f4f4;
-}
-
-.Popular_heading{
-  text-align: center;
-  padding: 1rem;
-}
-
-link{
-  text-decoration: none;
-}
-
