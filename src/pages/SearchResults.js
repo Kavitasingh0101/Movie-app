@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
-import "../App.css"; // Ensure styles are imported
+// import "../App.css"; // Ensure styles are imported
 
 const SearchResults = () => {
 	const { query } = useParams();

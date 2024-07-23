@@ -1,4 +1,3 @@
-// src/pages/Home.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MovieCard from "../components/MovieCard";
@@ -9,18 +8,27 @@ const Home = () => {
 	const [movies, setMovies] = useState([]);
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(1);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const fetchMovies = async () => {
-			const res = await axios.get(
-				`https://api.themoviedb.org/3/movie/popular?api_key=c45a857c193f6302f2b5061c3b85e743&language=en-US&page=${page}`
-			);
-			setMovies(res.data.results);
-			setTotalPages(res.data.total_pages);
+			try {
+				const response = await axios.get(
+					`https://api.themoviedb.org/3/movie/popular?api_key=c45a857c193f6302f2b5061c3b85e743&page=${page}`
+				);
+				setMovies(response.data.results);
+				setTotalPages(response.data.total_pages);
+			} catch (err) {
+				setError("Failed to fetch movies. Please try again later.");
+			}
 		};
 
 		fetchMovies();
 	}, [page]);
+
+	if (error) {
+		return <div>{error}</div>;
+	}
 
 	return (
 		<div className="Popular_container">

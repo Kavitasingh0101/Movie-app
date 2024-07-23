@@ -1,9 +1,8 @@
-// src/components/MovieCard.js
 import React from "react";
 import { Link } from "react-router-dom";
+import "../styles/MovieCard.css";
 
 const MovieCard = ({ movie }) => {
-	console.log(movie);
 	return (
 		<div className="movie-card">
 			<Link to={`/movie/${movie.id}`}>

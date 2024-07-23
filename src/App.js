@@ -7,7 +7,7 @@ import TopRated from "./pages/TopRated";
 import Upcoming from "./pages/Upcoming";
 import MovieDetail from "./pages/MovieDetail";
 import SearchResults from "./pages/SearchResults";
-import "./App.css";
+// import "./App.css";
 
 const App = () => {
 	return (

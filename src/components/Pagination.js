@@ -1,5 +1,5 @@
-// src/components/Pagination.js
 import React from "react";
+import "../styles/Pagination.css";
 
 const Pagination = ({ page, setPage, totalPages }) => {
 	return (

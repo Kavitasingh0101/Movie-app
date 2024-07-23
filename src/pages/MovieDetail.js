@@ -1,71 +1,68 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import "../styles/MovieDetail.css";
 
 const MovieDetail = () => {
 	const { id } = useParams();
 	const [movie, setMovie] = useState(null);
-	const [cast, setCast] = useState([]);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const fetchMovie = async () => {
-			const res = await axios.get(
-				`https://api.themoviedb.org/3/movie/${id}?api_key=c45a857c193f6302f2b5061c3b85e743&language=en-US`
-			);
-			setMovie(res.data);
-		};
-
-		const fetchCast = async () => {
-			const res = await axios.get(
-				`https://api.themoviedb.org/3/movie/${id}/credits?api_key=c45a857c193f6302f2b5061c3b85e743&language=en-US`
-			);
-			setCast(res.data.cast);
+			try {
+				const response = await axios.get(
+					`https://api.themoviedb.org/3/movie/${id}?api_key=c45a857c193f6302f2b5061c3b85e743&append_to_response=credits`
+				);
+				setMovie(response.data);
+			} catch (err) {
+				setError(
+					"Failed to fetch movie details. Please try again later."
+				);
+			}
 		};
 
 		fetchMovie();
-		fetchCast();
 	}, [id]);
 
-	if (!movie) return <div>Loading...</div>;
+	if (error) {
+		return <div>{error}</div>;
+	}
+
+	if (!movie) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<div className="movie-detail-container">
 			<div className="movie-detail-header">
-				<div className="content">
-					<div>
-						<img
-							src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-							alt={movie.title}
-						/>
-					</div>
-					<div className="innerData">
-						<h1>{movie.title}</h1>
-						<h2 className="rating">Rating: {movie.vote_average}</h2>
-						<p>Release Date: {movie.release_date}</p>
-						<p>Vote Count: {movie.vote_count}</p>
-					</div>
-				</div>
-				<div className="movie-overview">
+				<h1>{movie.title}</h1>
+				<img
+					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+					alt={movie.title}
+				/>
+			</div>
+			<div className="content">
+				<div className="innerData">
 					<h2>Overview</h2>
 					<p>{movie.overview}</p>
+					<p className="rating">Rating: {movie.vote_average}</p>
+					<p>Release Date: {movie.release_date}</p>
 				</div>
 			</div>
-			<h1 className="cast-header">Cast</h1>
+			<h2 className="cast-header">Cast</h2>
 			<div className="cast-list">
-				{cast.map((member) => (
-					<div
-						className="cast-member movie-card"
-						key={member.cast_id}
-					>
-						<img
-							src={`https://image.tmdb.org/t/p/w200${member.profile_path}`}
-							alt={member.name}
-						/>
-						<p className="cast-name">{member.name}</p>
-						<p className="cast-character">as {member.character}</p>
-					</div>
-				))}
+				{movie.credits &&
+					movie.credits.cast.map((actor) => (
+						<div key={actor.id} className="cast-member">
+							<img
+								src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+								alt={actor.name}
+							/>
+							<p className="cast-name">{actor.name}</p>
+							<p className="cast-character">{actor.character}</p>
+						</div>
+					))}
 			</div>
 		</div>
 	);
